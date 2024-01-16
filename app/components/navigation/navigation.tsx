@@ -28,8 +28,8 @@ async function addInitialSettings(): Promise<void> {
 const Nav: React.FC = () => {
 	addInitialSettings();
 
-	const storedSettings = useLiveQuery(() => db.settings.toArray());
-	const isSettingsLoading = !storedSettings;
+	const storedSetting = useLiveQuery(() => db.settings.toCollection().first());
+	const isSettingsLoading = !storedSetting;
 
 	const [showSettings, setShowSettings] = useState<Boolean>(false);
 
@@ -37,9 +37,8 @@ const Nav: React.FC = () => {
 	// As addInitialSettings create two data rows at the very first time,
 	// the storedSettings will be an array of two objects.
 	// But, if it's just happened in dev env, it should only check the first object in prod.
-	if (storedSettings) {
-		console.log(storedSettings[0]);
-		// console.log(storedSettings[1]);
+	if (storedSetting) {
+		console.log(storedSetting);
 	}
 
 	return (
@@ -65,7 +64,7 @@ const Nav: React.FC = () => {
 							className="fill-white"
 							onClick={() => setShowSettings(!showSettings)}
 						/>
-						<UniversalSettings storedSettings={storedSettings} />
+						<UniversalSettings storedSetting={storedSetting} />
 					</div>
 				) : null
 			}
