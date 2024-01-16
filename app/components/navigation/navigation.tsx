@@ -10,7 +10,7 @@ import {
 	FaCog,
 	FaRegWindowClose,
 } from "react-icons/fa";
-import UniversalSettings from "./settings";
+import UniversalSettings from "./universal-settings";
 
 async function addInitialSettings(): Promise<void> {
 	db.settings.count().then(async (count: number) => {
